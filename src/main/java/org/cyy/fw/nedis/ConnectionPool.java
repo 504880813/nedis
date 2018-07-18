@@ -318,7 +318,12 @@ public class ConnectionPool {
 					if (future.isSuccess()) {
 						future.channel().closeFuture()
 								.addListener(channelCloseFutureListener);
+						//TODO  是否需要存入连接池? 看完源码再说
+//						if(idleSize() < minIdle){
+//						    addIdleChannel(future.channel());
+//						}
 						sendMessage(future.channel(), message, responseAdapter);
+						
 					} else {
 						LOGGER.log(Level.SEVERE,
 								future.channel()
